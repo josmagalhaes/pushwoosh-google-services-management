@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="pushwoosh-google-services-management" version="1.0.0">
+    <name>Pushwoosh Google Services Management</name>
+    <description>Cordova plugin that enables the management of the various google-services.zip file when using the Pushwoosh plugin in the OutSystems Platform</description>
+    <author>Armando Gomes</author>
+    <license>Apache 2.0</license>
+    <keywords>cordova,android,ios,pushwoosh,google-services,google</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=6.0.0" />
+    </engines>
+
+    <js-module src="www/GoogleServices.js" name="GoogleServices">
+        <clobbers target="plugins.GoogleServices" />
+    </js-module>
+
+    <platform name='android'>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GoogleServices">
+                <param name="android-package" value="com.armandogomes.cordova.plugin.GoogleServices"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/GoogleServices.java" target-dir="src/com/armandogomes/cordova/plugin" />
+        
+		<hook type="before_prepare" src="hooks/before_build_MoveGoogleServices.js" />
+    </platform>
+	
+	<platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GoogleServices">
+                <param name="ios-package" value="GoogleServices"/>
+            </feature>
+        </config-file>
+		
+		<header-file src="src/ios/GoogleServices.h" />
+        <source-file src="src/ios/GoogleServices.m" />
+		
+		<hook type="before_prepare" src="hooks/before_build_MoveGoogleServices.js" />
+	</platform>
+</plugin>

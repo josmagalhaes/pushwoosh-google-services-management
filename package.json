@@ -1,0 +1,35 @@
+{
+  "name": "pushwoosh-google-services-management",
+  "version": "1.0.0",
+  "description": "Cordova plugin that enables the management of the various google-services.zip file when using the Pushwoosh plugin in the OutSystems Platform",
+  "cordova": {
+    "id": "pushwoosh-google-services-management",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aportuguesecoder/pushwoosh-google-services-management.git"
+  },
+  "keywords": [
+    "cordova",
+    "android",
+    "pushwoosh",
+    "google-services",
+    "google",
+    "ios",
+    "cordova-ios",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Armando Gomes",
+  "license": "Apache 2.0",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=6.0.0"
+    }
+  ]
+}
