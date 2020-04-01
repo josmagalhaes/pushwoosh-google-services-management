@@ -1,22 +1,8 @@
 #!/usr/bin/env node
 
-// This hook copies resource files to appropriate platform specific locations
-// recommended to be used with the 'after_platform_add' hook
-// based off devgirl's original script from her sample hooks.
-// http://www.mooreds.com/sample-hooks.tar.gz
+//global variables
+var environment = "";
 
-// these resource paths need to exist in the root of your Codova project
-var resourcesPath = 'pushwoosh-google-services-management/hooks/';
-
-// configure all the files to copy from each of the resource paths.
-// key of object is the source file, value is the destination location.
-// the directory/file structure used closely mirrors how the resources
-// are stored in each platform
-var androidFilesToCopy = {
-  // android icons
-  "android/beep.wav": "beep.wav",
-  "android/beep_long.wav" : "beep_long.wav"
-};
 
 // required node modules
 var fs = require('fs');
@@ -24,41 +10,32 @@ var path = require('path');
 var rootdir = "";
 var buildDir = "";
 
-// android platform resource path
-var platformAndroidPath = 'platforms/android/app/src/main/res/raw';
-var platformiOSPath = '';
-
-
-// determine platform to copy to
-console.log('Android: copy resource files');
-filesToCopy(androidFilesToCopy, 'android');
-
-
-// function that copies resource files to choosen platform
-function filesToCopy(obj, platform) {
-  var srcFile, destFile, destDir;
-
-  Object.keys(obj).forEach(function(key) {
-    if(platform === 'android') {
-      srcFile = path.join(rootdir, resourcesPath, key);
-      destFile = path.join(buildDir, platformAndroidPath, obj[key]);
+// determine environment (read it from config.xml)
+var configFile = "config.xml";
+var xmlData = fs.readFileSync(configFile).toString('utf8');
+var n = xmlData.search("<preference name=\"environment\"");
+if(n > 0)
+{
+  n += 38;
+  var count = 0;
+  var cont = true;
+  while(cont) {
+    if(xmlData[n+count] == "\"") {
+      cont = false;
+    } else {
+      count++;
     }
-    console.log('copying ' + srcFile + ' to ' + destFile);
+  }
+  environment = xmlData.substring(n, n+count);
+}
 
-    console.log('file exists: ' + fs.existsSync(srcFile));
-    console.log('destination directory exists: ' + fs.existsSync(destDir));
+copyGoogleServicesFile();
 
-    destDir = path.dirname(destFile);
-    console.log("destination dir: " + destDir);
-    if(!fs.existsSync(destDir)) {
-      console.log('directory doesn\'t exist');
-      fs.mkdirSync(destDir, {recursive: true});
-    };
+function copyGoogleServicesFile() {
+  var srcFile, destFile;
 
-    console.log('destination directory exists: ' + fs.existsSync(destDir));
-
-    if (fs.existsSync(srcFile) && fs.existsSync(destDir)) {
-      fs.createReadStream(srcFile).pipe(fs.createWriteStream(destFile));
-    }
-  });
+  srcFile = path.join("www/google-services", environment, "google-services.zip");
+  if(fs.existsSync(srcFile)) {
+    fs.createReadStream(srcFile).pipe(fs.createWriteStream("www/google-services/google-services.zip"));
+  }
 }
