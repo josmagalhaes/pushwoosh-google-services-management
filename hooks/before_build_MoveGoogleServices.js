@@ -10,6 +10,7 @@ var path = require('path');
 // determine appId (read it from config.xml)
 var configFile = "config.xml";
 var xmlData = fs.readFileSync(configFile).toString('utf8');
+console.log(xmlData);
 var n = xmlData.search("<widget id=\"");
 if(n > 0)
 {
@@ -29,11 +30,9 @@ if(n > 0)
 //function to copy the file
 function copyGoogleServicesFile() {
   var srcFile = path.join("www/google-services", appId, "google-services.zip");
-  console.log(srcFile);
   if(fs.existsSync(srcFile)) {
     fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("www/google-services/google-services.zip")));
   }
 };
-
 
 copyGoogleServicesFile();
