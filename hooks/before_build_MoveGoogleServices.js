@@ -10,11 +10,11 @@ var path = require('path');
 // determine appId (read it from config.xml)
 var configFile = "config.xml";
 var xmlData = fs.readFileSync(configFile).toString('utf8');
-console.log(xmlData);
-var n = xmlData.search("<widget id=\"");
+
+var n = xmlData.search(" id=\"");
 if(n > 0)
 {
-  n += 12;
+  n += 5;
   var count = 0;
   var cont = true;
   while(cont) {
