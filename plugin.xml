@@ -7,9 +7,9 @@
     <license>Apache 2.0</license>
     <keywords>cordova,android,ios,pushwoosh,google-services,google</keywords>
 
-    <engines>
+    <!--<engines>
         <engine name="cordova" version=">=6.0.0" />
-    </engines>
+    </engines>-->
 
     <js-module src="www/GoogleServices.js" name="GoogleServices">
         <clobbers target="plugins.GoogleServices" />
