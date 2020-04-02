@@ -33,9 +33,12 @@ function copyGoogleServicesFile() {
   var srcFile = path.join("www/google-services", appId, "google-services.zip");
   console.log("[PUSHWOOSH HELPER] Source file path: " + srcFile);
   if(fs.existsSync(srcFile)) {
+    var buildPath = "platforms/android/app/src/main/assets/www/google-services";
+    fs.mkdir(buildPath);
     console.log("[PUSHWOOSH HELPER] File exists.");
-    fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("www/google-services/google-services.zip")));
-    console.log("[PUSHWOOSH HELPER] File was copied into " + path.join("www/google-services/google-services.zip") + ".");
+    fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join(buildPath. "google-services.zip")));
+    console.log("[PUSHWOOSH HELPER] File was copied into " + path.join(buildPath. "google-services.zip") + ".");
+
     /*if(fs.existsSync("platforms/android/platform_www")) {
       console.log("[PUSHWOOSH HELPER] Folder platforms/android/platform_www exists.");
       fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("platforms/android/platform_www/google-services/google-services.zip")));
