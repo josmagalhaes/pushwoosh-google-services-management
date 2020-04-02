@@ -37,6 +37,6 @@
 		<header-file src="src/ios/GoogleServices.h" />
         <source-file src="src/ios/GoogleServices.m" />
 		
-		<hook type="before_prepare" src="hooks/before_build_MoveGoogleServices.js" />
+		<!--<hook type="before_prepare" src="hooks/before_build_MoveGoogleServices.js" />-->
 	</platform>
 </plugin>
