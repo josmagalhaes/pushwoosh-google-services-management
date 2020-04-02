@@ -1,22 +1,19 @@
 #!/usr/bin/env node
 
 //global variables
-var environment = "";
-
+var appId = "";
 
 // required node modules
 var fs = require('fs');
 var path = require('path');
-var rootdir = "";
-var buildDir = "";
 
-// determine environment (read it from config.xml)
+// determine appId (read it from config.xml)
 var configFile = "config.xml";
 var xmlData = fs.readFileSync(configFile).toString('utf8');
-var n = xmlData.search("<preference name=\"environment\"");
+var n = xmlData.search("<widget id=\"");
 if(n > 0)
 {
-  n += 38;
+  n += 12;
   var count = 0;
   var cont = true;
   while(cont) {
@@ -26,16 +23,16 @@ if(n > 0)
       count++;
     }
   }
-  environment = xmlData.substring(n, n+count);
+  appId = xmlData.substring(n, n+count);
 }
+
+//function to copy the file
+function copyGoogleServicesFile() {
+  var srcFile = path.join("www/google-services", appId, "google-services.zip");
+  console.log(srcFile);
+  if(fs.existsSync(srcFile)) {
+    fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("www/google-services/google-services.zip")));
+  }
+};
 
 copyGoogleServicesFile();
-
-function copyGoogleServicesFile() {
-  var srcFile, destFile;
-
-  srcFile = path.join("www/google-services", environment, "google-services.zip");
-  if(fs.existsSync(srcFile)) {
-    fs.createReadStream(srcFile).pipe(fs.createWriteStream("www/google-services/google-services.zip"));
-  }
-}
