@@ -35,8 +35,12 @@ function copyGoogleServicesFile() {
   if(fs.existsSync(srcFile)) {
     console.log("[PUSHWOOSH HELPER] File exists.");
     fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("www/google-services/google-services.zip")));
-    fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("platforms/android/platform_www/google-services/google-services.zip")));
-    console.log("[PUSHWOOSH HELPER] File was copied.");
+    if(fs.existsSync("platforms/android/platform_www")) {
+      console.log("[PUSHWOOSH HELPER] Folder platforms/android/platform_www exists.");
+      fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join("platforms/android/platform_www/google-services/google-services.zip")));
+      console.log("[PUSHWOOSH HELPER] File was copied into " + path.join("platforms/android/platform_www/google-services/google-services.zip") + ".");
+    }
+    console.log("[PUSHWOOSH HELPER] File was copied into " + path.join("www/google-services/google-services.zip") + ".");
   } else {
     console.log("[PUSHWOOSH HELPER] File doesn't exist.");
   }
