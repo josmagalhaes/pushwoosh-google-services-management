@@ -3,7 +3,7 @@
 //global variables
 var appId = "";
 
-console.log("Pushwoosh Helper Start")
+console.log("[PUSHWOOSH HELPER] Start");
 
 // required node modules
 var fs = require('fs');
@@ -40,6 +40,10 @@ function copyGoogleServicesFile() {
     console.log("[PUSHWOOSH HELPER] File exists.");
     fs.createReadStream(srcFile).pipe(fs.createWriteStream(path.join(buildPath, "google-services.zip")));
     console.log("[PUSHWOOSH HELPER] File was copied into " + path.join(buildPath, "google-services.zip") + ".");
+  }
+  else
+  {
+    console.log("[PUSHWOOSH HELPER] File missing.");
   }
 };
 
