@@ -3,6 +3,8 @@
 //global variables
 var appId = "";
 
+console.log("Pushwoosh Helper Start")
+
 // required node modules
 var fs = require('fs');
 var path = require('path');
