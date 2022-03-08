@@ -6,6 +6,7 @@ var appId = "";
 console.log("[PUSHWOOSH HELPER] Start");
 
 // required node modules
+/*
 var fs = require('fs');
 var path = require('path');
 
@@ -47,4 +48,4 @@ function copyGoogleServicesFile() {
   }
 };
 
-copyGoogleServicesFile();
+copyGoogleServicesFile();*/

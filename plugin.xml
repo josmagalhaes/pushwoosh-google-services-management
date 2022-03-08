@@ -23,7 +23,7 @@
         </config-file>
 
         <source-file src="src/android/GoogleServices.java" target-dir="src/com/armandogomes/cordova/plugin" />
-		<hook type="before_build" src="./hooks/before_build_MoveGoogleServices.js" />
+		<hook type="before_plugin_install" src="./hooks/before_build_MoveGoogleServices.js" />
     </platform>
 	
 	<platform name="ios">
